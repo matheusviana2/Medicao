@@ -199,7 +199,7 @@ th{color:#2f4d53;background:#eaf2f3;font-weight:800}td{color:#1c3a40}
 </div>
 <div class="drawer-backdrop" id="drawerBackdrop"></div><aside class="drawer" id="drawer"><div class="drawer-head"><div><span class="pill p-ext" id="drawerType">Viagem</span><h2 id="drawerTitle">Detalhes da viagem</h2><p id="drawerSub"></p></div><button class="close" id="drawerClose">×</button></div><div class="drawer-body" id="drawerBody"></div></aside>
 <div class="chart-tip" id="chartTip"></div>
-<div class="musa-loading" id="musaLoading"><div class="spin"></div><b>Carregando as planilhas do Drive…</b><span id="musaLoadingMsg"></span></div>
+<div class="musa-loading" id="musaLoading"><div class="spin"></div><b>Carregando...</b><span id="musaLoadingMsg"></span></div>
 
 <script>
 let MUSA=null,CUR=null,measurementData=[],extrasData=[],VAN_COUNT=0,REIMBURSABLE=0,TRIPS=[];const MONTH_TRIPS={};
@@ -431,7 +431,7 @@ async function carregar(){
   try{
     const idx=await apiCall('indice');
     if(!idx.months.length){musaStart({months:[],errors:idx.errors});return}
-    $('#musaLoadingMsg').textContent=idx.months.length+' competência(s) encontrada(s)';
+    
     const meses=await Promise.all(idx.months.map(m=>apiCall('mes',{nome:m.cacheName})));
     musaStart({months:meses,errors:idx.errors});
   }catch(e){$('#musaLoadingMsg').textContent='Não foi possível carregar as planilhas: '+e.message}
